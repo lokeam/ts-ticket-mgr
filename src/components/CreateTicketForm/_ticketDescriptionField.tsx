@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { TextField } from '@mui/material';
-import { InputEl } from './InputEl';
+import { InputEl } from './interfaces/InputEl';
 import PropTypes from 'prop-types';
 
 export const TicketDescriptionField: FC<InputEl> = (
@@ -16,7 +16,7 @@ export const TicketDescriptionField: FC<InputEl> = (
       id="description"
       name="description"
       label="Description"
-      placeholder="Description"
+      placeholder="Ticket Description"
       variant="outlined"
       size="small"
       multiline

@@ -1,7 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { Box, Typography, Stack } from '@mui/material';
-import { TicketDescriptionField } from './interfaces/_ticketDescriptionField';
-import { TicketTitleField } from './interfaces/_ticketTitleField';
+import { TicketDescriptionField } from './_ticketDescriptionField';
+import { TicketTitleField } from './_ticketTitleField';
+import { TicketDateField } from './_ticketDateField';
 
 export const CreateTicketForm: FC = (): ReactElement => {
   return (
@@ -26,6 +27,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
       >
         <TicketTitleField />
         <TicketDescriptionField />
+        <TicketDateField />
       </Stack>
     </Box>
   );

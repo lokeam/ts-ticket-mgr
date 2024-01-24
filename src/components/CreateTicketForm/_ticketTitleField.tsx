@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { TextField } from '@mui/material';
-import { InputEl } from './InputEl';
+import { InputEl } from './interfaces/InputEl';
 import PropTypes from 'prop-types';
 
 export const TicketTitleField: FC<InputEl> = (
