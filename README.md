@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# TypeScript Ticket Manager
+Ticketing and issue management system.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create tickets for various tasks, add title and details, assign due date, status and priority level.
 
-## Available Scripts
+Powered by TypeScript, React, Material UI, Node, Express and MySQL.
 
-In the project directory, you can run:
+## Feature Roadmap
+- [ ] Fully functioning React front end user interface. Manage ticket details, status, due dates and priority.
+- [ ] Dynamic listing of tickets in Backlog, Progress and Completed.
+- [ ] API Endpoints for managing creation, updating, and deleting tickets as well as signup and signin.
+- [ ] Routing for SEO Marketing splash screen and login screens
+- [ ] User Authentication with JSON Web Tokens and password hashing.
+- [ ] User credentials and password strength validation.
 
-### `npm start`
+## Project Status - 5%
+_In active development_
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to use
+```bash
+# Clone the repo
+$ git clone git@github.com:lokeam/ts-ticket-mgr.git
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Navigate to the ts-ticket-mgr directory
+$ cd eslab
 
-### `npm test`
+# Install dependencies
+$ npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Boot up the app
+$ npm start
 
-### `npm run build`
+# Open your browser of choice, go to http://localhost:3000/
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Acknowledgements
+Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
