@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { Box } from '@mui/material';
 import { TicketHeader } from './_ticketHeader';
 import { TicketDescription } from './_ticketDescription';
+import { TicketFooter } from './_ticketFooter';
 
 export const Ticket: FC = ():ReactElement => {
   return (
@@ -10,8 +11,8 @@ export const Ticket: FC = ():ReactElement => {
       width="100%"
       justifyContent="flex-start"
       flexDirection="column"
-      mb={2}
-      p={4}
+      mb={4}
+      p={2}
       sx={{
         width: '100%',
         backgroundColor: 'background.paper',
@@ -22,6 +23,7 @@ export const Ticket: FC = ():ReactElement => {
     >
       <TicketHeader />
       <TicketDescription />
+      <TicketFooter />
     </Box>
   );
 };
