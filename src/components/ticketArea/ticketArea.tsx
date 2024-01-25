@@ -3,6 +3,7 @@ import { Grid, Box } from '@mui/material';
 import { format } from 'date-fns';
 
 import { TicketCounter } from '../ticketCounter/ticketCounter';
+import { Ticket } from '../ticket/ticket';
 
 
 export const TicketArea: FC = (): ReactElement => {
@@ -39,7 +40,9 @@ export const TicketArea: FC = (): ReactElement => {
             xs={10}
             md={8}
           >
-            <Box>Task Here</Box>
+            <Ticket />
+            <Ticket />
+            <Ticket />
           </Grid>
         </Grid>
     </Grid>
