@@ -1,7 +1,16 @@
 import React, { FC, ReactElement } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
+import { Counter } from './interfaces/Counter';
+import { Status } from '../createTicketForm/enums/Status';
 
-export const TicketCounter:FC = (): ReactElement => {
+export const TicketCounter:FC<Counter> = (
+  props,
+  ): ReactElement => {
+    const {
+      status = Status.todo,
+      count = 0
+    } = props;
+
   return (
     <>
       <Box
