@@ -17,7 +17,7 @@ export const TicketHeader: FC<TicketDateTitle> = (
       display="flex"
       width="100%"
       justifyContent="space-between"
-      mb={4}
+      mb={3}
     >
       <Box>
         <Typography variant="h6">{title}</Typography>

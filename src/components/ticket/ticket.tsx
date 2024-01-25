@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Box } from '@mui/material';
 import { TicketHeader } from './_ticketHeader';
+import { TicketDescription } from './_ticketDescription';
 
 export const Ticket: FC = ():ReactElement => {
   return (
@@ -20,7 +21,7 @@ export const Ticket: FC = ():ReactElement => {
       }}
     >
       <TicketHeader />
-      Ticket Content
+      <TicketDescription />
     </Box>
   );
 };
