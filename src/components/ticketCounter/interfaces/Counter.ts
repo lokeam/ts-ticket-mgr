@@ -7,5 +7,5 @@ export type TicketCounterStatusType =
 
 export interface Counter {
   count?: number;
-  status: TicketCounterStatusType;
-}
+  status?: TicketCounterStatusType;
+};

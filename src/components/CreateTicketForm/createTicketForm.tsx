@@ -50,7 +50,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
               {
                 value: Status.inProgress,
                 label: Status.inProgress.toUpperCase(),
-              }
+              },
             ]}
           />
           <TicketSelectField
@@ -68,7 +68,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
               {
                 value: Priority.high,
                 label: Priority.high,
-              }
+              },
             ]}
           />
         </Stack>
