@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { DataSource } from "typeorm";
+import { Ticket } from "./src/tickets/tickets.entity";
 
 // Instantiate express
 const app:Express = express();
@@ -22,6 +23,7 @@ export const AppDataSource = new DataSource({
   username: process.env.POSTGRE_USER,
   password: process.env.POSTGRE_PASSWORD,
   database: process.env.POSTGRE_DB,
+  entities: [Ticket],
   synchronize: true,
 });
 
