@@ -72,6 +72,17 @@ class TicketController {
         .json({ errors: errors.array() });
     }
   }
+
+  // PUT
+  public async update(request:Request, response:Response):Promise<Response> {
+    const errors = validationResult(request);
+
+    if (!errors.isEmpty()) {
+      return response
+        .status(400)
+        .json({ errors: errors.array() });
+    }
+  }
 }
 
 export const ticketController = new TicketController();
