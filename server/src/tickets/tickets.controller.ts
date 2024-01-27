@@ -1,5 +1,6 @@
 import { AppDataSource } from "../..index";
 import { Ticket } from "./tickets.entity";
+import { instanceToPlain } from "class-transformer";
 
 export class TicketController {
   constructor(
@@ -18,10 +19,14 @@ export class TicketController {
           date: 'ASC',
         },
       });
+    // Convert tickets to arr of objs
+    allTickets = instanceToPlain(allTickets) as Ticket[];
+
+    return allTickets;
     } catch(error) {
       console.log(error);
     }
 
-    // Convert tickets to arr of objs
+
   }
 }

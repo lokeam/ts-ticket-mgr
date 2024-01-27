@@ -3,7 +3,11 @@ import { TicketController } from "./tickets.controller";
 
 export const ticketRouter: Router = Router();
 
-ticketRouter.get("/tickets", (request:Request, response:Response) => {
+ticketRouter.get("/tickets",
+  async (request:Request, response:Response) => {
+
   const ticketController = new TicketController();
-  ticketController.getAll()
+  const allTickets = await ticketController.getAll()
+
+  response.json(allTickets).status(200);
 });
