@@ -1,5 +1,7 @@
 import { Router, Request, Response } from "express";
 import { TicketController } from "./tickets.controller";
+import { createValidator } from "./tickets.validator";
+import { validationResult } from "express-validator";
 
 export const ticketRouter: Router = Router();
 
@@ -12,5 +14,15 @@ ticketRouter.get("/tickets",
   response.json(allTickets).status(200);
 });
 
-ticketRouter.post('/tickets', (request:Request, response:Response) => {})
+ticketRouter.post('/tickets',
+  createValidator,
+  //@ts-ignore
+  async (request:Request, response:Response) => {
+    const errors = validationResult(request);
 
+    if (!errors.isEmpty()) {
+      return response
+        .status(400)
+        .json({ errors: errors.array() });
+    }
+});
