@@ -2,8 +2,11 @@ import { AppDataSource } from "../..index";
 import { Ticket } from "./tickets.entity";
 import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
+import { validationResult } from "express-validator";
 
 class TicketController {
+
+  // GET
   public async getAll(
     request:Request,
     response:Response
@@ -26,9 +29,26 @@ class TicketController {
       return response
         .json({ error: 'Internal Server Error '})
         .status(500);
+    }
+  }
 
+  // POST
+  public async create(
+    request:Request,
+    response:Response
+  ):Promise<Response> {
+    const errors = validationResult(request);
+
+    // 1. Create new ticket instance
+    // 2. Add all required props to Ticket obj
+    // 3. Save Ticket to db
+
+    if (!errors.isEmpty()) {
+      return response
+        .status(400)
+        .json({ errors: errors.array() });
     }
   }
 }
 
-export ticketController = new TicketController();
+export const ticketController = new TicketController();
