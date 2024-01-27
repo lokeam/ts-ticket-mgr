@@ -40,8 +40,31 @@ class TicketController {
     const errors = validationResult(request);
 
     // 1. Create new ticket instance
+    const newTicket = new Ticket();
+
     // 2. Add all required props to Ticket obj
+    newTicket.title = request.body.title;
+    newTicket.date = request.body.date;
+    newTicket.description = request.body.description;
+    newTicket.priority = request.body.priority;
+    newTicket.status = request.body.status;
+
     // 3. Save Ticket to db
+    let createdTicket: Ticket;
+
+    try {
+      createdTicket = await AppDataSource.getRepository(
+        Ticket,
+      ).save(newTicket);
+
+      createdTicket = instanceToPlain(createdTicket) as Ticket;
+
+      return response.json(createdTicket).status(201);
+    } catch(errors) {
+      return response
+        .json({ error: 'Internal Server Error '})
+        .status(500);
+    }
 
     if (!errors.isEmpty()) {
       return response

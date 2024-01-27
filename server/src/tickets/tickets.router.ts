@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { ticketController } from "./tickets.controller";
 import { createValidator } from "./tickets.validator";
 
