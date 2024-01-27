@@ -11,3 +11,6 @@ ticketRouter.get("/tickets",
 
   response.json(allTickets).status(200);
 });
+
+ticketRouter.post('/tickets', (request:Request, response:Response) => {})
+
