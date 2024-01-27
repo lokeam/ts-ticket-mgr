@@ -1,9 +1,10 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { DataSource } from "typeorm";
 import { Ticket } from "./src/tickets/tickets.entity";
+import { ticketRouter } from "./src/tickets/tickets.router";
 
 // Instantiate express
 const app:Express = express();
@@ -29,10 +30,6 @@ export const AppDataSource = new DataSource({
 
 const port = process.env.PORT;
 
-app.get("/", (request:Request, response:Response) => {
-  response.send("Hello from Express Server");
-});
-
 AppDataSource.initialize().then(() => {
 
   app.listen(port);
@@ -40,3 +37,5 @@ AppDataSource.initialize().then(() => {
 }).catch((error) => {
   console.error('Error during Data src initialization: ', error);
 });
+
+app.use('/', ticketRouter);
