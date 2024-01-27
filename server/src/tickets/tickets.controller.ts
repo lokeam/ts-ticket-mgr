@@ -1,20 +1,19 @@
 import { AppDataSource } from "../..index";
 import { Ticket } from "./tickets.entity";
 import { instanceToPlain } from "class-transformer";
+import { Request, Response } from "express";
 
-export class TicketController {
-  constructor(
-    private taskRespository =
-      AppDataSource.getRepository(
-        Ticket,
-      )) {}
-  public async getAll(): Promise<Ticket[]> {
+class TicketController {
+  public async getAll(
+    request:Request,
+    response:Response
+  ): Promise<Response> {
     // Init pointer to hold all tickets
     let allTickets: Ticket[];
 
     // Fetch all tickets from db
     try {
-      allTickets = await this.taskRespository.find({
+      allTickets = await AppDataSource.taskRespository.find({
         order: {
           date: 'ASC',
         },
@@ -22,11 +21,14 @@ export class TicketController {
     // Convert tickets to arr of objs
     allTickets = instanceToPlain(allTickets) as Ticket[];
 
-    return allTickets;
-    } catch(error) {
-      console.log(error);
+    return response.json(allTickets).status(200);
+    } catch(errors) {
+      return response
+        .json({ error: 'Internal Server Error '})
+        .status(500);
+
     }
-
-
   }
 }
+
+export ticketController = new TicketController();
