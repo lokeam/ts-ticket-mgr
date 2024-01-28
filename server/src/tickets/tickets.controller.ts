@@ -1,8 +1,9 @@
 import { AppDataSource } from "../..index";
 import { Ticket } from "./tickets.entity";
-import { instanceToPlain } from "class-transformer";
+import { instanceToPlain, plainToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { UpdateResult } from "typeorm";
 
 class TicketController {
 
@@ -81,6 +82,50 @@ class TicketController {
       return response
         .status(400)
         .json({ errors: errors.array() });
+    }
+    // 1. Find ticket, if exists, return 400 if null
+    let ticket: Ticket | null;
+    // 2. Init pointer for updated ticket
+    try {
+      ticket = await AppDataSource
+        .getRepository(Ticket)
+        .findOne({
+          where: { id: request.body.id },
+        });
+    } catch (errors) {
+      return response
+        .json({ error: 'Internal Server Error' })
+        .status(500);
+    }
+
+    if (!ticket) {
+      return response.status(400).json({
+        error: 'Ticket with the given ID does not exist'
+      });
+    }
+
+    let updatedTicket: UpdateResult;
+
+    // 3. Update
+    try {
+      updatedTicket = await AppDataSource
+        .getRepository(Ticket)
+        .update(
+          request.body.id,
+          plainToInstance(
+            Ticket, {
+              status: request.body.status
+            },
+          ));
+          // 4. Convert updated ticket to an obj
+          updatedTicket = instanceToPlain(
+            updatedTicket
+          ) as UpdateResult;
+          return response.json(updatedTicket).status(200);
+    } catch (errors) {
+      return response
+        .json({ error: 'Internal Server Error'})
+        .status(500);
     }
   }
 }
