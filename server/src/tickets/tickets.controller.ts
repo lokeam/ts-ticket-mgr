@@ -1,4 +1,4 @@
-import { AppDataSource } from "../..index";
+import { AppDataSource } from "../..";
 import { Ticket } from "./tickets.entity";
 import { instanceToPlain, plainToInstance } from "class-transformer";
 import { Request, Response } from "express";
@@ -17,7 +17,10 @@ class TicketController {
 
     // Fetch all tickets from db
     try {
-      allTickets = await AppDataSource.taskRespository.find({
+      allTickets = await AppDataSource.getRepository(
+        Ticket,
+      ).find(
+        {
         order: {
           date: 'ASC',
         },
