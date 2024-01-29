@@ -37,9 +37,16 @@ export const CreateTicketForm: FC = (): ReactElement => {
         sx={{width: '100%'}}
         spacing={2}
       >
-        <TicketTitleField />
-        <TicketDescriptionField />
-        <TicketDateField />
+        <TicketTitleField
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <TicketDescriptionField
+          onChange={(event) => setDescription(event.target.value)}
+        />
+        <TicketDateField
+          value={date}
+          onChange={(date) => setDate(date)}
+        />
         <Stack
           direction="row"
           spacing={2}
@@ -48,6 +55,8 @@ export const CreateTicketForm: FC = (): ReactElement => {
           <TicketSelectField
             label="Status"
             name="status"
+            value={status}
+            onChange={(event) => setStatus(event.target.value as string)}
             items={[
               {
                 value: Status.todo,
@@ -62,6 +71,8 @@ export const CreateTicketForm: FC = (): ReactElement => {
           <TicketSelectField
             label="Priority"
             name="priority"
+            value={priority}
+            onChange={(event) => setPriority(event.target.value as string)}
             items={[
               {
                 value: Priority.low,
