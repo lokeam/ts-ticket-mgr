@@ -1,5 +1,13 @@
 import React, { FC, ReactElement, useState } from 'react';
-import { Box, Typography, Stack } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Stack,
+  LinearProgress,
+  Button,
+  Alert,
+  AlertTitle
+} from '@mui/material';
 
 import { Priority } from './enums/Priority';
 import { Status } from './enums/Status';
@@ -26,6 +34,16 @@ export const CreateTicketForm: FC = (): ReactElement => {
       px={4}
       my={6}
     >
+      <Alert
+        severity="success"
+        sx={{
+          width: '100%',
+          marginBottom: '16px'
+        }}
+      >
+        <AlertTitle>Success</AlertTitle>
+        Task created successfully!
+      </Alert>
       <Typography
         mb={2}
         component="h2"
@@ -89,6 +107,12 @@ export const CreateTicketForm: FC = (): ReactElement => {
             ]}
           />
         </Stack>
+        <LinearProgress />
+        <Button
+          size="large"
+          variant="contained"
+          fullWidth
+        >Create Ticket</Button>
       </Stack>
     </Box>
   );
