@@ -1,4 +1,5 @@
 import React, { FC, ReactElement, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import {
   Box,
   Typography,
@@ -16,6 +17,7 @@ import { TicketDescriptionField } from './_ticketDescriptionField';
 import { TicketTitleField } from './_ticketTitleField';
 import { TicketDateField } from './_ticketDateField';
 import { TicketSelectField } from './_ticketSelectField';
+import { sendApiRequest } from '../../utils/sentApiRequest';
 
 
 export const CreateTicketForm: FC = (): ReactElement => {
@@ -24,6 +26,15 @@ export const CreateTicketForm: FC = (): ReactElement => {
   const [ date, setDate ] = useState<Date | null>(new Date());
   const [ status, setStatus] = useState<string>(Status.todo);
   const [ priority, setPriority ] = useState<string>(Priority.normal);
+
+  // todo: need mutation here
+  const createTicketMutation = useMutation((data) =>
+    sendApiRequest(
+      'http://localhost:3200/tickets',
+      'POST',
+      data
+    )
+  );
 
   return (
     <Box
