@@ -7,13 +7,13 @@ Powered by TypeScript, React, Material UI, Node, Express and PostgreSQL.
 
 ## Feature Roadmap
 - [X] Fully functioning React front end user interface. Manage ticket details, status, due dates and priority.
-- [ ] Dynamic listing of tickets in Backlog, Progress and Completed.
-- [ ] API Endpoints for managing creation, updating, and deleting tickets as well as signup and signin.
+- [X] Dynamic listing of tickets in Backlog, Progress and Completed.
+- [X] API Endpoints for managing creation, updating, and deleting tickets as well as signup and signin.
 - [ ] Routing for SEO Marketing splash screen and login screens
 - [ ] User Authentication with JSON Web Tokens and password hashing.
 - [ ] User credentials and password strength validation.
 
-## Project Status - 30%
+## Project Status - 60%
 _In active development_
 
 ## How to use
