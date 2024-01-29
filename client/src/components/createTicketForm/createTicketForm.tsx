@@ -18,6 +18,7 @@ import { TicketTitleField } from './_ticketTitleField';
 import { TicketDateField } from './_ticketDateField';
 import { TicketSelectField } from './_ticketSelectField';
 import { sendApiRequest } from '../../utils/sentApiRequest';
+import { CreateTask } from '../ticketArea/interfaces/createTask';
 
 
 export const CreateTicketForm: FC = (): ReactElement => {
@@ -28,7 +29,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
   const [ priority, setPriority ] = useState<string>(Priority.normal);
 
   // todo: need mutation here
-  const createTicketMutation = useMutation((data) =>
+  const createTicketMutation = useMutation((data:CreateTask) =>
     sendApiRequest(
       'http://localhost:3200/tickets',
       'POST',
