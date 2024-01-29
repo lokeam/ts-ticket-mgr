@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { Box, Typography, Stack } from '@mui/material';
 
 import { Priority } from './enums/Priority';
@@ -11,6 +11,12 @@ import { TicketSelectField } from './_ticketSelectField';
 
 
 export const CreateTicketForm: FC = (): ReactElement => {
+  const [ title, setTitle ] = useState<string | undefined>(undefined);
+  const [ description, setDescription ] = useState<string | undefined>(undefined);
+  const [ date, setDate ] = useState<Date | null>(new Date());
+  const [ status, setStatus] = useState<string>(Status.todo);
+  const [ priority, setPriority ] = useState<string>(Priority.normal);
+
   return (
     <Box
       display="flex"
