@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { UseMutationOptions } from '@tanstack/react-query';
 import {
   Box,
   Typography,
@@ -10,6 +11,7 @@ import {
   AlertTitle
 } from '@mui/material';
 
+import { CreateTicket } from '../ticketArea/interfaces/createTicket';
 import { Priority } from './enums/Priority';
 import { Status } from './enums/Status';
 
@@ -18,7 +20,6 @@ import { TicketTitleField } from './_ticketTitleField';
 import { TicketDateField } from './_ticketDateField';
 import { TicketSelectField } from './_ticketSelectField';
 import { sendApiRequest } from '../../utils/sentApiRequest';
-import { CreateTask } from '../ticketArea/interfaces/createTask';
 
 
 export const CreateTicketForm: FC = (): ReactElement => {
@@ -29,13 +30,29 @@ export const CreateTicketForm: FC = (): ReactElement => {
   const [ priority, setPriority ] = useState<string>(Priority.normal);
 
   // todo: need mutation here
-  const createTicketMutation = useMutation((data:CreateTask) =>
-    sendApiRequest(
+  const createTicketMutation = useMutation({
+    mutationFn: (data:CreateTicket) => sendApiRequest(
       'http://localhost:3200/tickets',
       'POST',
-      data
+      data,
     )
-  );
+  });
+
+  // todo: implement stronger library for field validation
+  function createTicketHandler () {
+    if (!title || !date || !description) {
+      return;
+    }
+
+    const ticket: CreateTicket = {
+      title,
+      description,
+      date: date.toString(),
+      status,
+      priority,
+    };
+    createTicketMutation.mutate(ticket);
+  }
 
   return (
     <Box
@@ -121,6 +138,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
         </Stack>
         <LinearProgress />
         <Button
+          onClick={createTicketHandler}
           size="large"
           variant="contained"
           fullWidth
