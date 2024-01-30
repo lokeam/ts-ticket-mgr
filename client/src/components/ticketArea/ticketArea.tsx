@@ -1,12 +1,24 @@
 import React, { FC, ReactElement } from 'react';
 import { Grid, Box } from '@mui/material';
 import { format } from 'date-fns';
+import { useQuery } from '@tanstack/react-query';
+import { sendApiRequest } from '../../utils/sentApiRequest';
 
 import { TicketCounter } from '../ticketCounter/ticketCounter';
 import { Ticket } from '../ticket/ticket';
 
 
 export const TicketArea: FC = (): ReactElement => {
+  const { error, isPending, data, refetch } = useQuery(
+    'tasks',
+    async () => {
+      return await sendApiRequest(
+        'http://localhost:3200/tasks',
+        'GET',
+      );
+    }
+  );
+
   return (
       <Grid item md={8} px={4}>
         <Box mb={8} px={4}>
