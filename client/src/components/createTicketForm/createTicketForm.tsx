@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import {
   Box,
@@ -27,6 +27,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
   const [ date, setDate ] = useState<Date | null>(new Date());
   const [ status, setStatus] = useState<string>(Status.todo);
   const [ priority, setPriority ] = useState<string>(Priority.normal);
+  const [ showSuccess, setShowSuccess ] = useState<boolean>(false);
 
   // todo: need mutation here
   const createTicketMutation = useMutation({
@@ -53,6 +54,19 @@ export const CreateTicketForm: FC = (): ReactElement => {
     createTicketMutation.mutate(ticket);
   }
 
+  /* Manage state changes */
+  useEffect(() => {
+    if (createTicketMutation.isSuccess) {
+      setShowSuccess(true);
+    }
+
+    const successTimer = setTimeout(() => {
+      setShowSuccess(false)
+    }, 5000);
+
+    return () => clearTimeout(successTimer);
+  }, [createTicketMutation.isSuccess]);
+
   return (
     <Box
       display="flex"
@@ -62,16 +76,18 @@ export const CreateTicketForm: FC = (): ReactElement => {
       px={4}
       my={6}
     >
-      <Alert
-        severity="success"
-        sx={{
-          width: '100%',
-          marginBottom: '16px'
-        }}
-      >
+      { showSuccess && (
+        <Alert
+          severity="success"
+          sx={{
+            width: '100%',
+            marginBottom: '16px'
+          }}
+        >
         <AlertTitle>Success</AlertTitle>
-        Task created successfully!
-      </Alert>
+          Task created successfully!
+        </Alert>
+      )}
       <Typography
         mb={2}
         component="h2"
