@@ -1,6 +1,5 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { UseMutationOptions } from '@tanstack/react-query';
 import {
   Box,
   Typography,
@@ -88,9 +87,11 @@ export const CreateTicketForm: FC = (): ReactElement => {
           onChange={(event) => setTitle(event.target.value)}
         />
         <TicketDescriptionField
+          disabled={createTicketMutation.isPending}
           onChange={(event) => setDescription(event.target.value)}
         />
         <TicketDateField
+          disabled={createTicketMutation.isPending}
           value={date}
           onChange={(date) => setDate(date)}
         />
@@ -100,6 +101,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
           sx={{width: '100%'}}
         >
           <TicketSelectField
+            disabled={createTicketMutation.isPending}
             label="Status"
             name="status"
             value={status}
@@ -116,6 +118,7 @@ export const CreateTicketForm: FC = (): ReactElement => {
             ]}
           />
           <TicketSelectField
+            disabled={createTicketMutation.isPending}
             label="Priority"
             name="priority"
             value={priority}
@@ -136,8 +139,15 @@ export const CreateTicketForm: FC = (): ReactElement => {
             ]}
           />
         </Stack>
-        <LinearProgress />
+        { createTicketMutation.isPending && <LinearProgress /> }
         <Button
+          disabled={
+            !title ||
+            !description ||
+            !date ||
+            !status ||
+            !priority
+          }
           onClick={createTicketHandler}
           size="large"
           variant="contained"
