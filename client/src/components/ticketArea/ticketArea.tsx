@@ -6,14 +6,15 @@ import { sendApiRequest } from '../../utils/sentApiRequest';
 
 import { TicketCounter } from '../ticketCounter/ticketCounter';
 import { Ticket } from '../ticket/ticket';
+import { TicketApi } from './interfaces/ticketAPI';
 
 
 export const TicketArea: FC = (): ReactElement => {
   const { error, isPending, data, refetch } = useQuery(
-    'tasks',
+    'tickets',
     async () => {
-      return await sendApiRequest(
-        'http://localhost:3200/tasks',
+      return await sendApiRequest<TicketApi[]>(
+        'http://localhost:3200/tickets',
         'GET',
       );
     }
