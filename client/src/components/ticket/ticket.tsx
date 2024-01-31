@@ -7,6 +7,7 @@ import { TicketUI } from './interfaces/Ticket';
 import { Priority } from '../createTicketForm/enums/Priority';
 import { changePriorityBorderColor } from './util/changePriorityBorderColor';
 import PropTypes from 'prop-types';
+import { Status } from '../createTicketForm/enums/Status';
 
 
 export const Ticket: FC<TicketUI> = (
@@ -18,6 +19,8 @@ export const Ticket: FC<TicketUI> = (
     date = new Date(),
     description = 'The time has come, the walrus said',
     priority = Priority.normal,
+    id,
+    status = Status.todo,
     onStatusChange = (event) => console.log(event),
     onClick = (event) => console.log(event)
   } = props;
@@ -41,6 +44,8 @@ export const Ticket: FC<TicketUI> = (
       <TicketHeader title={title} date={date} />
       <TicketDescription description={description} />
       <TicketFooter
+        id={id}
+        status={status}
         onStatusChange={onStatusChange}
         onClick={onClick}
       />

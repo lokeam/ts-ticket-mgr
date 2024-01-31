@@ -7,6 +7,8 @@ export const TicketFooter:FC<FooterUI> = (
   props,
 ): ReactElement => {
   const {
+    id,
+    status,
     onStatusChange = (event) => console.log(event),
     onClick = (event) => console.log(event),
   } = props;
@@ -43,6 +45,8 @@ export const TicketFooter:FC<FooterUI> = (
 };
 
 TicketFooter.propTypes = {
+  id: PropTypes.string.isRequired,
+  status: PropTypes.string,
   onStatusChange: PropTypes.func,
   onClick: PropTypes.func,
 };
