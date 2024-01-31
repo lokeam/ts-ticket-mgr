@@ -72,9 +72,23 @@ export const TicketArea: FC = (): ReactElement => {
                 </Alert>
             )}
 
-            <Ticket id={"123"}/>
-            <Ticket id={"123"}/>
-            <Ticket id={"123"}/>
+            {isPending ? ( <LinearProgress /> ) : (
+              Array.isArray(data) &&
+              data.length > 0 &&
+              data.map((each, index) => {
+                return (
+                  <Ticket
+                    id={each.id}
+                    key={index + each.priority}
+                    title={each.title}
+                    date={new Date(each.date)}
+                    description={each.description}
+                    priority={each.priority}
+                    status={each.status}
+                  />
+                )
+              })
+            )}
           </Grid>
         </Grid>
     </Grid>
