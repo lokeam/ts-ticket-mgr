@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { Box, Button, Switch, FormControlLabel } from '@mui/material';
 import { FooterUI } from './interfaces/TicketFooter';
 import PropTypes from 'prop-types';
+import { Status } from '../createTicketForm/enums/Status';
 
 export const TicketFooter:FC<FooterUI> = (
   props,
@@ -24,6 +25,7 @@ export const TicketFooter:FC<FooterUI> = (
         label="In Progress"
         control={
         <Switch
+          defaultChecked={status === Status.inProgress}
           onChange={(event) => onStatusChange(event)}
           color="warning"
         />}

@@ -12,6 +12,7 @@ import { sendApiRequest } from '../../utils/sentApiRequest';
 import { TicketCounter } from '../ticketCounter/ticketCounter';
 import { Ticket } from '../ticket/ticket';
 import { TicketApi } from './interfaces/ticketAPI';
+import { Status } from '../createTicketForm/enums/Status';
 
 
 export const TicketArea: FC = (): ReactElement => {
@@ -76,7 +77,9 @@ export const TicketArea: FC = (): ReactElement => {
               Array.isArray(data) &&
               data.length > 0 &&
               data.map((each, index) => {
-                return (
+                return each.status === Status.todo ||
+                each.status === Status.inProgress ?
+                (
                   <Ticket
                     id={each.id}
                     key={index + each.priority}
@@ -86,7 +89,7 @@ export const TicketArea: FC = (): ReactElement => {
                     priority={each.priority}
                     status={each.status}
                   />
-                )
+                ) : (false);
               })
             )}
           </Grid>
