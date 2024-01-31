@@ -7,11 +7,13 @@ import {
 } from '@mui/material';
 import { format } from 'date-fns';
 import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { sendApiRequest } from '../../utils/sentApiRequest';
 
 import { TicketCounter } from '../ticketCounter/ticketCounter';
 import { Ticket } from '../ticket/ticket';
 import { TicketApi } from './interfaces/ticketAPI';
+import { UpdateTicket } from './interfaces/updateTicket';
 import { Status } from '../createTicketForm/enums/Status';
 
 
@@ -25,6 +27,27 @@ export const TicketArea: FC = (): ReactElement => {
       );
     }
   );
+
+  // create update ticket mutation
+  const updateTicketMutation = useMutation({
+    mutationFn: (data: UpdateTicket) => sendApiRequest(
+      'http://localhost:3200/tickets',
+      'PUT',
+      data
+    )
+  });
+
+  function onStatusChangeHandler(
+    event: React.ChangeEvent<HTMLInputElement>,
+    id: string,
+  ) {
+    updateTicketMutation.mutate({
+      id,
+      status: event.target.checked
+        ? Status.inProgress
+        : Status.todo,
+    });
+  }
 
   return (
       <Grid item md={8} px={4}>
@@ -81,14 +104,15 @@ export const TicketArea: FC = (): ReactElement => {
                 each.status === Status.inProgress ?
                 (
                   <Ticket
-                    id={each.id}
-                    key={index + each.priority}
-                    title={each.title}
                     date={new Date(each.date)}
                     description={each.description}
+                    id={each.id}
+                    key={index + each.priority}
+                    onStatusChange={onStatusChangeHandler}
                     priority={each.priority}
                     status={each.status}
-                  />
+                    title={each.title}
+                    />
                 ) : (false);
               })
             )}

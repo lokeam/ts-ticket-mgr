@@ -26,13 +26,13 @@ export const TicketFooter:FC<FooterUI> = (
         control={
         <Switch
           defaultChecked={status === Status.inProgress}
-          onChange={(event) => onStatusChange(event)}
+          onChange={(event) => onStatusChange(event, id)}
           color="warning"
         />}
 
       />
       <Button
-        onClick={(event) => onClick(event)}
+        onClick={(event) => onClick(event, id)}
         variant="contained"
         color="success"
         size="small"

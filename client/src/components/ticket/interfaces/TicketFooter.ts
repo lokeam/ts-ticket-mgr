@@ -5,10 +5,12 @@ export interface FooterUI {
   status?: string;
   onStatusChange?: (
     event: React.ChangeEvent<HTMLInputElement>,
+    id: string,
   ) => void;
   onClick?: (
     event:
     | React.MouseEvent<HTMLButtonElement>
     | React.MouseEvent<HTMLAnchorElement>,
+    id: string,
   ) => void;
 };
