@@ -1,5 +1,10 @@
 import React, { FC, ReactElement } from 'react';
-import { Grid, Box } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Grid,
+  LinearProgress,
+} from '@mui/material';
 import { format } from 'date-fns';
 import { useQuery } from '@tanstack/react-query';
 import { sendApiRequest } from '../../utils/sentApiRequest';
@@ -53,9 +58,23 @@ export const TicketArea: FC = (): ReactElement => {
             xs={10}
             md={8}
           >
-            <Ticket />
-            <Ticket />
-            <Ticket />
+            {error && (
+              <Alert severity="error">
+                Error fetching tickets
+              </Alert>
+            )}
+
+            {!error &&
+              Array.isArray(data) &&
+              data.length === 0 &&  (
+                <Alert severity="warning">
+                  No tickets in queue. Please create some tickets!
+                </Alert>
+            )}
+
+            <Ticket id={"123"}/>
+            <Ticket id={"123"}/>
+            <Ticket id={"123"}/>
           </Grid>
         </Grid>
     </Grid>
