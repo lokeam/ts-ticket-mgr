@@ -49,6 +49,18 @@ export const TicketArea: FC = (): ReactElement => {
     });
   }
 
+  function markCompleteHandler(
+    event:
+    | React.MouseEvent<HTMLButtonElement>
+    | React.MouseEvent<HTMLAnchorElement>,
+    id: string,
+  ) {
+    updateTicketMutation.mutate({
+      id,
+      status: Status.completed,
+    })
+  }
+
   return (
       <Grid item md={8} px={4}>
         <Box mb={8} px={4}>
@@ -108,6 +120,7 @@ export const TicketArea: FC = (): ReactElement => {
                     description={each.description}
                     id={each.id}
                     key={index + each.priority}
+                    onClick={markCompleteHandler}
                     onStatusChange={onStatusChangeHandler}
                     priority={each.priority}
                     status={each.status}
